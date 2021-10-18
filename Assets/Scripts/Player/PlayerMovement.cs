@@ -1,43 +1,55 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PlayerInputs))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 6f;            
+    public float speed = 6f;  
+
+    [SerializeField] private PlayerInputs _playerInputs;
 
     Vector3 movement;                   
     Animator anim;
     Rigidbody playerRigidbody;
     int floorMask;
     float camRayLength = 100f;
+    private bool _isAgent = false;          
 
     void Awake()
     {
         floorMask = LayerMask.GetMask("Floor");
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
+
+        _isAgent = GetComponent<PlayerAgent>() != null;
     }
 
 
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        if (_isAgent)
+            return;
 
-        Move(h, v);
-        Turning();
-        Animating(h, v);
+        Move(_playerInputs.HorizontalAxis, _playerInputs.VerticalAxis);
+        Turning(Input.mousePosition);
+        Animating(_playerInputs.HorizontalAxis, _playerInputs.VerticalAxis);
     }
 
-    void Move(float h, float v)
+    public void Move(float h, float v)
     {
         movement.Set(h, 0f, v);
         movement = movement.normalized * speed * Time.deltaTime;
         playerRigidbody.MovePosition(transform.position + movement);
     }
 
-    void Turning()
+    public void Turning(float x, float z)
     {
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Quaternion newRotation = Quaternion.LookRotation(new Vector3(x, 0, z));
+        playerRigidbody.MoveRotation(newRotation);
+    }
+
+    public void Turning(Vector3 mousePosition)
+    {
+        Ray camRay = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit floorHit;
 
         if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))

@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public event Action<EnemyHealth> OnDeath;
+    public event Action OnHit;
+
     public int startingHealth = 100;
     public int currentHealth;
     public float sinkSpeed = 2.5f;
@@ -15,7 +19,6 @@ public class EnemyHealth : MonoBehaviour
     CapsuleCollider capsuleCollider;
     bool isDead;
     bool isSinking;
-
 
     void Awake ()
     {
@@ -42,6 +45,7 @@ public class EnemyHealth : MonoBehaviour
         if(isDead)
             return;
 
+        OnHit?.Invoke();
         enemyAudio.Play ();
 
         currentHealth -= amount;
@@ -58,6 +62,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
+        OnDeath?.Invoke(this);
+
         isDead = true;
 
         capsuleCollider.isTrigger = true;

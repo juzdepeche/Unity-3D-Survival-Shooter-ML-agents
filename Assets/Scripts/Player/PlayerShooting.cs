@@ -6,6 +6,8 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
 
+    [SerializeField] private PlayerInputs _playerInputs;
+    [SerializeField] private PlayerAgent _playerAgent;
 
     float timer;
     Ray shootRay = new Ray();
@@ -32,7 +34,7 @@ public class PlayerShooting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+		if(_playerInputs.IsShooting)
         {
             Shoot ();
         }
@@ -51,8 +53,11 @@ public class PlayerShooting : MonoBehaviour
     }
 
 
-    void Shoot ()
+    public void Shoot ()
     {
+        if (timer < timeBetweenBullets || Time.timeScale == 0)
+            return;
+
         timer = 0f;
 
         gunAudio.Play ();
@@ -68,18 +73,26 @@ public class PlayerShooting : MonoBehaviour
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
 
+        bool didHitEnemy = false;
+
         if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
         {
             EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
             if(enemyHealth != null)
             {
                 enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+                didHitEnemy = true;
             }
             gunLine.SetPosition (1, shootHit.point);
         }
         else
         {
             gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
+        }
+
+        if (!didHitEnemy && _playerAgent != null)
+        {
+            _playerAgent.AddReward(-0.1f);
         }
     }
 }
