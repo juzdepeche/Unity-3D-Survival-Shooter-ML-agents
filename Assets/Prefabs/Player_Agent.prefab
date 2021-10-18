@@ -39,6 +39,7 @@ Transform:
   - {fileID: 4408257484706260}
   - {fileID: 4188904052543288}
   - {fileID: 4040967776524292}
+  - {fileID: 3762507978762824453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124,6 +125,7 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.44705883}
+  _playerAgent: {fileID: 8795278036387179335}
 --- !u!114 &2393556235861143302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,9 +184,11 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  _enemySpawnerManager: {fileID: 0}
   _playerMovement: {fileID: 114059483668479014}
   _playerShooting: {fileID: 114777735849590160}
   _playerInputs: {fileID: 2393556235861143302}
+  _heuristicAimbot: 0
 --- !u!114 &1834714450580712123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5445,6 +5449,7 @@ MonoBehaviour:
   timeBetweenBullets: 0.15
   range: 100
   _playerInputs: {fileID: 2393556235861143302}
+  _playerAgent: {fileID: 0}
 --- !u!1 &1714024589823368
 GameObject:
   m_ObjectHideFlags: 0
@@ -5529,3 +5534,62 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.32802516, y: 0.73065233, z: -0.10551195}
     m_Extent: {x: 0.66185755, y: 0.8997083, z: 0.5952063}
   m_DirtyAABB: 0
+--- !u!1 &6021940068966995368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3762507978762824453}
+  - component: {fileID: 5646886150320481287}
+  m_Layer: 0
+  m_Name: AroundPlayerRayPerceptionSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3762507978762824453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021940068966995368}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4925742195866752}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5646886150320481287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021940068966995368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: AroundPlayerRayPerceptionSensor
+  m_DetectableTags:
+  - Enemy
+  - Terrain
+  m_RaysPerDirection: 15
+  m_MaxRayDegrees: 180
+  m_SphereCastRadius: 0.5
+  m_RayLength: 37
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
