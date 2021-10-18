@@ -1,27 +1,37 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawnerManager : MonoBehaviour
 {
-    public int EnemyCount => enemies.Count;
+    public int EnemyCount => _enemies.Count;
     [SerializeField] private Transform _player;
     [SerializeField] private PlayerAgent _playerAgent;
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<GameObject> _enemies = new List<GameObject>();
+
+    public void ResetEnemies()
+    {
+        foreach (GameObject enemy in _enemies)
+        {
+            Destroy(enemy);
+        }
+        _enemies.Clear();
+    }
 
     public void AddNewEnemy(GameObject enemy)
     {
-        enemies.Add(enemy);
+        _enemies.Add(enemy.gameObject);
         enemy.GetComponent<EnemyHealth>().OnDeath += OnEnemyDeathHandler;
         enemy.GetComponent<EnemyHealth>().OnHit += OnEnemyHitHandler;
     }
 
     public Vector3 GetClosestEnemyPositionFromPlayer()
     {
-        if (enemies.Count == 0)
+        if (_enemies.Count == 0)
             return Vector3.zero;
 
         SortEnemiesByDistance();
-        return enemies[0].transform.position;
+        return _enemies[0].transform.position;
     }
 
     private void OnEnemyHitHandler()
@@ -41,12 +51,12 @@ public class EnemySpawnerManager : MonoBehaviour
 
         enemy.OnDeath -= OnEnemyDeathHandler;
         enemy.OnHit -= OnEnemyHitHandler;
-        enemies.Remove(enemy.gameObject);
+        _enemies.Remove(enemy.gameObject);
     }
 
     private void SortEnemiesByDistance()
     {
-        enemies.Sort(delegate(GameObject a, GameObject b)
+        _enemies.Sort(delegate(GameObject a, GameObject b)
         {
             return Vector3.Distance(_player.transform.position, a.transform.position)
             .CompareTo(

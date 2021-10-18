@@ -30,7 +30,8 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent <AudioSource> ();
         playerMovement = GetComponent <PlayerMovement> ();
         playerShooting = GetComponentInChildren <PlayerShooting> ();
-        currentHealth = startingHealth;
+
+        ResetHealth();
     }
 
 
@@ -47,6 +48,16 @@ public class PlayerHealth : MonoBehaviour
         damaged = false;
     }
 
+    public void ResetHealth()
+    {
+        currentHealth = startingHealth;
+
+        damaged = false;
+        isDead = false;
+
+        playerMovement.enabled = true;
+        playerShooting.enabled = true;
+    }
 
     public void TakeDamage (int amount)
     {
@@ -74,10 +85,6 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
-        playerShooting.DisableEffects ();
-
-        anim.SetTrigger ("Die");
-
         playerAudio.clip = deathClip;
         playerAudio.Play ();
 
@@ -87,12 +94,21 @@ public class PlayerHealth : MonoBehaviour
         if (_playerAgent != null)
         {
             _playerAgent.AddReward(-5f);
+            _playerAgent.EndEpisode();
+        }
+        else
+        {
+            playerShooting.DisableEffects ();
+            anim.SetTrigger ("Die");
         }
     }
 
 
     public void RestartLevel ()
     {
-        SceneManager.LoadScene (0);
+        if (_playerAgent == null)
+        {
+            SceneManager.LoadScene (0);
+        }
     }
 }

@@ -5,25 +5,30 @@ using UnityEngine;
 
 public class PlayerAgent : Agent
 {
+    public Action OnEpisodeBeginEvent;
     [SerializeField] private EnemySpawnerManager _enemySpawnerManager;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerShooting _playerShooting;
+    [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private PlayerInputs _playerInputs;
+
     [SerializeField] private bool _heuristicAimbot = false;
-    private Ray _shootRay = new Ray();
 
     private int _floorMask;
-    private int _shootableMask;
 
     private void Awake()
     {
         _floorMask = LayerMask.GetMask("Floor");
-        _shootableMask = LayerMask.GetMask("Shootable");
     }
 
     void FixedUpdate()
     {
         AddReward(0.01f / (float) (_enemySpawnerManager.EnemyCount == 0 ? 1 : _enemySpawnerManager.EnemyCount));
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        OnEpisodeBeginEvent?.Invoke();
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -65,6 +70,12 @@ public class PlayerAgent : Agent
         }
     }
 
+    public void ResetPlayer()
+    {
+        transform.position = Vector3.zero;
+        _playerHealth.ResetHealth();
+    }
+
     private void HeuristicAimbot(ActionSegment<float> continuousActions, ActionSegment<int> discreteActions)
     {
         Vector3 closestEnemy = _enemySpawnerManager.GetClosestEnemyPositionFromPlayer();
@@ -78,9 +89,6 @@ public class PlayerAgent : Agent
             continuousActions[3] = direction.z;
 
             discreteActions[0] = 1;
-
-            _shootRay.origin = transform.position;
-            _shootRay.direction = transform.forward;
 
             discreteActions[0] = 1;
         }

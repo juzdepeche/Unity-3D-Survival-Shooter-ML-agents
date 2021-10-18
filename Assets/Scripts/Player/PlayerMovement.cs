@@ -43,6 +43,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Turning(float x, float z)
     {
+        Vector3 lookAt = new Vector3(x, 0, z);
+        if (lookAt == Vector3.zero)
+            return;
+            
         Quaternion newRotation = Quaternion.LookRotation(new Vector3(x, 0, z));
         playerRigidbody.MoveRotation(newRotation);
     }
