@@ -10153,6 +10153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAttack: {fileID: 114824449064418496}
   _enemyMovement: {fileID: 114590841328081060}
+  _enemyHealth: {fileID: 114012929654625680}
 --- !u!114 &114824449064418496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10185,7 +10186,11 @@ MonoBehaviour:
   currentHealth: 0
   sinkSpeed: 2.5
   scoreValue: 30
-  deathClip: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: 8c615fd0429f34edf85539d70279360d, type: 3}
+  anim: {fileID: 9583922}
+  enemyAudio: {fileID: 8279214}
+  hitParticles: {fileID: 19897060}
+  capsuleCollider: {fileID: 13644992}
 --- !u!114 &114590841328081060
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
     public event Action<EnemyHealth> OnDeath;
     public event Action OnHit;
+    public event Action OnRemoved;
 
     public int startingHealth = 100;
     public int currentHealth;
@@ -13,23 +15,18 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip deathClip;
 
 
-    Animator anim;
-    AudioSource enemyAudio;
-    ParticleSystem hitParticles;
-    CapsuleCollider capsuleCollider;
+    [SerializeField] private Animator anim;
+    [SerializeField] private AudioSource enemyAudio;
+    [SerializeField] private ParticleSystem hitParticles;
+    [SerializeField] private CapsuleCollider capsuleCollider;
+
     bool isDead;
     bool isSinking;
 
-    void Awake ()
+    private void OnEnable()
     {
-        anim = GetComponent <Animator> ();
-        enemyAudio = GetComponent <AudioSource> ();
-        hitParticles = GetComponentInChildren <ParticleSystem> ();
-        capsuleCollider = GetComponent <CapsuleCollider> ();
-
         currentHealth = startingHealth;
     }
-
 
     void Update ()
     {
@@ -38,7 +35,6 @@ public class EnemyHealth : MonoBehaviour
             transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
         }
     }
-
 
     public void TakeDamage (int amount, Vector3 hitPoint)
     {
@@ -81,6 +77,13 @@ public class EnemyHealth : MonoBehaviour
         GetComponent <Rigidbody> ().isKinematic = true;
         isSinking = true;
         ScoreManager.score += scoreValue;
-        Destroy (gameObject, 2f);
+        StartCoroutine(Remove());
+    }
+
+    private IEnumerator Remove()
+    {
+        yield return new WaitForSeconds(2f);
+
+        OnRemoved?.Invoke();
     }
 }
