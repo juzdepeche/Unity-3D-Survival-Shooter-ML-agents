@@ -3,55 +3,50 @@ using System.Collections;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public float timeBetweenAttacks = 0.5f;
-    public int attackDamage = 10;
+    [SerializeField] private Animator anim;
+    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private float timeBetweenAttacks = 0.5f;
+    [SerializeField] private int attackDamage = 10;
 
+    private PlayerHealth _playerHealth;
+    private Transform _playerTransform;
+    private bool _playerInRange;
+    private float _timer;
 
-    Animator anim;
-    GameObject player;
-    PlayerHealth playerHealth;
-    EnemyHealth enemyHealth;
-    bool playerInRange;
-    float timer;
-
-
-    void Awake ()
+    public void Initialize(Transform playerTransform, PlayerHealth playerHealth)
     {
-        player = GameObject.FindGameObjectWithTag ("Player");
-        playerHealth = player.GetComponent <PlayerHealth> ();
-        enemyHealth = GetComponent<EnemyHealth>();
-        anim = GetComponent <Animator> ();
+        _playerTransform = playerTransform;
+        _playerHealth = playerHealth;
     }
-
 
     void OnTriggerEnter (Collider other)
     {
-        if(other.gameObject == player)
+        if(other.transform == _playerTransform)
         {
-            playerInRange = true;
+            _playerInRange = true;
         }
     }
 
 
     void OnTriggerExit (Collider other)
     {
-        if(other.gameObject == player)
+        if(other.transform == _playerTransform)
         {
-            playerInRange = false;
+            _playerInRange = false;
         }
     }
 
 
     void Update ()
     {
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
 
-        if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+        if(_timer >= timeBetweenAttacks && _playerInRange && enemyHealth.currentHealth > 0)
         {
             Attack ();
         }
 
-        if(playerHealth.currentHealth <= 0)
+        if(_playerHealth.currentHealth <= 0)
         {
             anim.SetTrigger ("PlayerDead");
         }
@@ -60,11 +55,11 @@ public class EnemyAttack : MonoBehaviour
 
     void Attack ()
     {
-        timer = 0f;
+        _timer = 0f;
 
-        if(playerHealth.currentHealth > 0)
+        if(_playerHealth.currentHealth > 0)
         {
-            playerHealth.TakeDamage (attackDamage);
+            _playerHealth.TakeDamage (attackDamage);
         }
     }
 }

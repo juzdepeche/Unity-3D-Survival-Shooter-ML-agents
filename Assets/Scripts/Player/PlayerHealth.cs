@@ -37,13 +37,16 @@ public class PlayerHealth : MonoBehaviour
 
     void Update ()
     {
-        if(damaged)
+        if (_playerAgent == null)
         {
-            damageImage.color = flashColour;
-        }
-        else
-        {
-            damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            if(damaged)
+            {
+                damageImage.color = flashColour;
+            }
+            else
+            {
+                damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            }
         }
         damaged = false;
     }
@@ -62,16 +65,16 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage (int amount)
     {
         damaged = true;
-
         currentHealth -= amount;
-
-        healthSlider.value = currentHealth;
-
-        playerAudio.Play ();
 
         if (_playerAgent != null)
         {
             _playerAgent.AddReward(-1f);
+        }
+        else
+        {
+            healthSlider.value = currentHealth;
+            playerAudio.Play ();
         }
 
         if(currentHealth <= 0 && !isDead)

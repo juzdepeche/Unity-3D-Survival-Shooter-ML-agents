@@ -5,7 +5,10 @@ using UnityEngine;
 public class EnemySpawnerManager : MonoBehaviour
 {
     public int EnemyCount => _enemies.Count;
-    [SerializeField] private Transform _player;
+    public Transform PlayerTransform => _playerTransform;
+    [SerializeField] private Transform _playerTransform;
+    public PlayerHealth PlayerHealth => _playerHealth;
+    [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private PlayerAgent _playerAgent;
     private List<GameObject> _enemies = new List<GameObject>();
 
@@ -31,7 +34,7 @@ public class EnemySpawnerManager : MonoBehaviour
             return Vector3.zero;
 
         SortEnemiesByDistance();
-        return _enemies[0].transform.position;
+        return _enemies[0].transform.localPosition;
     }
 
     private void OnEnemyHitHandler()
@@ -58,9 +61,9 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         _enemies.Sort(delegate(GameObject a, GameObject b)
         {
-            return Vector3.Distance(_player.transform.position, a.transform.position)
+            return Vector3.Distance(_playerTransform.transform.localPosition, a.transform.localPosition)
             .CompareTo(
-                Vector3.Distance(_player.transform.position, b.transform.position) );
+                Vector3.Distance(_playerTransform.transform.localPosition, b.transform.localPosition) );
         });
     }
 }

@@ -72,7 +72,7 @@ public class PlayerAgent : Agent
 
     public void ResetPlayer()
     {
-        transform.position = Vector3.zero;
+        transform.localPosition = Vector3.zero;
         _playerHealth.ResetHealth();
     }
 
@@ -81,7 +81,7 @@ public class PlayerAgent : Agent
         Vector3 closestEnemy = _enemySpawnerManager.GetClosestEnemyPositionFromPlayer();
         if (closestEnemy != Vector3.zero)
         {
-            Vector3 direction = closestEnemy - transform.position;
+            Vector3 direction = closestEnemy - transform.localPosition;
             direction.y = 0f;
             direction.Normalize();
 
@@ -106,7 +106,7 @@ public class PlayerAgent : Agent
 
         if (Physics.Raycast(camRay, out floorHit, 100f, _floorMask))
         {
-            playerToMouse = floorHit.point - transform.position;
+            playerToMouse = floorHit.point - transform.localPosition;
             playerToMouse.y = 0f;
             playerToMouse.Normalize();
         }

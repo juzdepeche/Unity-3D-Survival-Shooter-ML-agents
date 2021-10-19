@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 13500000}
   - component: {fileID: 19500000}
   - component: {fileID: 8200000}
+  - component: {fileID: 683709421151458023}
   - component: {fileID: 114188182186600212}
   - component: {fileID: 114654579084198320}
   - component: {fileID: 114527849838549444}
@@ -309,6 +310,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &683709421151458023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fe2efea8bf34c468e5a0e4f926745d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyAttack: {fileID: 114527849838549444}
+  _enemyMovement: {fileID: 114188182186600212}
 --- !u!114 &114188182186600212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f6618a0da65fa45b24d5105d5d8422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHealth: {fileID: 114654579084198320}
+  _nav: {fileID: 19500000}
 --- !u!114 &114654579084198320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,6 +367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15099f5ee559584089d5851df572def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 9500000}
+  enemyHealth: {fileID: 114654579084198320}
   timeBetweenAttacks: 0.5
   attackDamage: 10
 --- !u!1 &100004

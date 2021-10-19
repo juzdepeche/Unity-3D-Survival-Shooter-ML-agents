@@ -9929,6 +9929,7 @@ GameObject:
   - component: {fileID: 19546556}
   - component: {fileID: 13536644}
   - component: {fileID: 13644992}
+  - component: {fileID: 8385416027791134181}
   - component: {fileID: 114824449064418496}
   - component: {fileID: 114012929654625680}
   - component: {fileID: 114590841328081060}
@@ -10138,6 +10139,20 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.2, z: 0}
+--- !u!114 &8385416027791134181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fe2efea8bf34c468e5a0e4f926745d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyAttack: {fileID: 114824449064418496}
+  _enemyMovement: {fileID: 114590841328081060}
 --- !u!114 &114824449064418496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10150,6 +10165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15099f5ee559584089d5851df572def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 9583922}
+  enemyHealth: {fileID: 114012929654625680}
   timeBetweenAttacks: 0.5
   attackDamage: 30
 --- !u!114 &114012929654625680
@@ -10181,6 +10198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f6618a0da65fa45b24d5105d5d8422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHealth: {fileID: 114012929654625680}
+  _nav: {fileID: 19546556}
 --- !u!1 &184534
 GameObject:
   m_ObjectHideFlags: 0

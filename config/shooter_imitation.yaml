@@ -27,9 +27,9 @@ behaviors:
       gail:
         strength: 0.01
         gamma: 0.99
-        demo_path: Demos/ExpertPyramid.demo
+        demo_path: Demos/demo.demo
     behavioral_cloning:
-      demo_path: Demos/ExpertPyramid.demo
+      demo_path: Demos/demo.demo
       strength: 0.5
       steps: 150000
     keep_checkpoints: 5

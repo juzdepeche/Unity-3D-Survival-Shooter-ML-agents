@@ -2,28 +2,27 @@
 
 public class EnemySpawner : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
-    public GameObject enemy;
-    public float spawnTime = 3f;
-    public Transform[] spawnPoints;
+    [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private float _spawnTime = 3f;
     [SerializeField] private EnemySpawnerManager _enemySpawnerManager;
 
     void Start ()
     {
-        InvokeRepeating ("Spawn", spawnTime, spawnTime);
+        InvokeRepeating ("Spawn", _spawnTime, _spawnTime);
     }
-
 
     void Spawn ()
     {
-        if(playerHealth.currentHealth <= 0f)
+        if(_enemySpawnerManager.PlayerHealth.currentHealth <= 0f)
         {
             return;
         }
 
-        int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+        int spawnPointIndex = Random.Range (0, _spawnPoints.Length);
 
-        GameObject newEnemy = Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-        _enemySpawnerManager.AddNewEnemy(newEnemy);
+        Enemy newEnemy = Instantiate (_enemyPrefab, _spawnPoints[spawnPointIndex].position, _spawnPoints[spawnPointIndex].localRotation);
+        newEnemy.Initialize(_enemySpawnerManager.PlayerTransform, _enemySpawnerManager.PlayerHealth);
+        _enemySpawnerManager.AddNewEnemy(newEnemy.gameObject);
     }
 }
