@@ -431,8 +431,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1813498570}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 230, z: 0}
 --- !u!1 &350513897
 GameObject:
@@ -1108,12 +1108,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228780870}
-  m_LocalRotation: {x: 0, y: 0.9063079, z: 0, w: 0.42261827}
+  m_LocalRotation: {x: -0, y: 0.9063079, z: -0, w: 0.42261827}
   m_LocalPosition: {x: -20.5, y: 0, z: 12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 1813498570}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 130, z: 0}
 --- !u!1001 &1323153468
 PrefabInstance:
@@ -1307,8 +1307,8 @@ Transform:
   m_LocalPosition: {x: 22.5, y: 0, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 1813498570}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
 --- !u!1 &1778988017
 GameObject:
@@ -1431,11 +1431,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99222b1e4a384e923ac7e86efc709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 184794679}
-  enemy: {fileID: 100002, guid: 57389b8a9071446bda143dc75b8a0778, type: 3}
-  spawnTime: 3
-  spawnPoints:
-  - {fileID: 1228780871}
+  _enemyPrefab: {fileID: 7421373185798781856, guid: ea3c2728ef33e3a4d99527a86cda6465,
+    type: 3}
+  _spawnPoints:
+  - {fileID: 1666955883}
+  _spawnTime: 5
   _enemySpawnerManager: {fileID: 1813498573}
 --- !u!4 &1813498570
 Transform:
@@ -1447,7 +1447,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1228780871}
+  - {fileID: 1666955883}
+  - {fileID: 263031898}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1463,11 +1466,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99222b1e4a384e923ac7e86efc709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 184794679}
-  enemy: {fileID: 153412, guid: 548c56f4bcf4db24b8aa057e9846a005, type: 3}
-  spawnTime: 10
-  spawnPoints:
+  _enemyPrefab: {fileID: 8385416027791134181, guid: 548c56f4bcf4db24b8aa057e9846a005,
+    type: 3}
+  _spawnPoints:
   - {fileID: 263031898}
+  _spawnTime: 12
   _enemySpawnerManager: {fileID: 1813498573}
 --- !u!114 &1813498572
 MonoBehaviour:
@@ -1481,11 +1484,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99222b1e4a384e923ac7e86efc709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 184794679}
-  enemy: {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
-  spawnTime: 3
-  spawnPoints:
-  - {fileID: 1666955883}
+  _enemyPrefab: {fileID: 683709421151458023, guid: 57389b8a9071446bda143dc75b8a0778,
+    type: 3}
+  _spawnPoints:
+  - {fileID: 1228780871}
+  _spawnTime: 5
   _enemySpawnerManager: {fileID: 1813498573}
 --- !u!114 &1813498573
 MonoBehaviour:
@@ -1499,4 +1502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5c97c9a7d63014cb7afb054d516f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1323153475}
+  _playerTransform: {fileID: 1323153475}
+  _playerHealth: {fileID: 184794679}
+  _playerAgent: {fileID: 0}

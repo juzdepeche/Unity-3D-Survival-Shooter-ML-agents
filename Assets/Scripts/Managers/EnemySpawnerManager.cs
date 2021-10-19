@@ -63,7 +63,7 @@ public class EnemySpawnerManager : MonoBehaviour
         {
             return Vector3.Distance(_playerTransform.transform.localPosition, a.transform.localPosition)
             .CompareTo(
-                Vector3.Distance(_playerTransform.transform.localPosition, b.transform.localPosition) );
+                Vector3.Distance(_playerTransform.transform.localPosition, b.transform.localPosition));
         });
     }
 }
