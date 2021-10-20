@@ -84,7 +84,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    void Death ()
+    void Death()
     {
         isDead = true;
 
@@ -106,12 +106,19 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-
-    public void RestartLevel ()
+    public void RestartLevel()
     {
         if (_playerAgent == null)
         {
             SceneManager.LoadScene (0);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "DeathWall")
+        {
+            Death();
         }
     }
 }

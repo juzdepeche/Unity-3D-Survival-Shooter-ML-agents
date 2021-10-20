@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Enemy
+  - DeathWall
   layers:
   - Default
   - TransparentFX

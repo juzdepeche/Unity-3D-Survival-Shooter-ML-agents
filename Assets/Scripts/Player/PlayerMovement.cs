@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
         _isAgent = GetComponent<PlayerAgent>() != null;
     }
 
-
     void FixedUpdate()
     {
         if (_isAgent)
@@ -65,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Animating(float h, float v)
+    private void Animating(float h, float v)
     {
         bool walking = h != 0f || v != 0f;
         anim.SetBool("IsWalking", walking);
