@@ -15,22 +15,25 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip deathClip;
 
 
-    [SerializeField] private Animator anim;
-    [SerializeField] private AudioSource enemyAudio;
-    [SerializeField] private ParticleSystem hitParticles;
-    [SerializeField] private CapsuleCollider capsuleCollider;
+    [SerializeField] private Animator _anim;
+    [SerializeField] private AudioSource _enemyAudio;
+    [SerializeField] private ParticleSystem _hitParticles;
+    [SerializeField] private CapsuleCollider _capsuleCollider;
 
-    bool isDead;
-    bool isSinking;
+    private bool _isDead;
+    private bool _isSinking;
 
     private void OnEnable()
     {
         currentHealth = startingHealth;
+        _capsuleCollider.isTrigger = false;
+        _isDead = false;
+        _isSinking = false;
     }
 
     void Update ()
     {
-        if(isSinking)
+        if(_isSinking)
         {
             transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
         }
@@ -38,16 +41,16 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage (int amount, Vector3 hitPoint)
     {
-        if(isDead)
+        if(_isDead)
             return;
 
         OnHit?.Invoke();
-        enemyAudio.Play ();
+        _enemyAudio.Play();
 
         currentHealth -= amount;
             
-        hitParticles.transform.position = hitPoint;
-        hitParticles.Play();
+        _hitParticles.transform.position = hitPoint;
+        _hitParticles.Play();
 
         if(currentHealth <= 0)
         {
@@ -60,22 +63,20 @@ public class EnemyHealth : MonoBehaviour
     {
         OnDeath?.Invoke(this);
 
-        isDead = true;
+        _isDead = true;
 
-        capsuleCollider.isTrigger = true;
+        _capsuleCollider.isTrigger = true;
 
-        anim.SetTrigger ("Dead");
+        _anim.SetTrigger ("Dead");
 
-        enemyAudio.clip = deathClip;
-        enemyAudio.Play ();
+        _enemyAudio.clip = deathClip;
+        _enemyAudio.Play ();
     }
 
 
     public void StartSinking ()
     {
-        GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
-        GetComponent <Rigidbody> ().isKinematic = true;
-        isSinking = true;
+        _isSinking = true;
         ScoreManager.score += scoreValue;
         StartCoroutine(Remove());
     }

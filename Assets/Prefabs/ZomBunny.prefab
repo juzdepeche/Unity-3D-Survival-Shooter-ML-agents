@@ -325,6 +325,8 @@ MonoBehaviour:
   _enemyAttack: {fileID: 114527849838549444}
   _enemyMovement: {fileID: 114188182186600212}
   _enemyHealth: {fileID: 114654579084198320}
+  _rigidbody: {fileID: 5400000}
+  _navMeshAgent: {fileID: 19500000}
 --- !u!114 &114188182186600212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,10 +358,10 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
-  anim: {fileID: 9500000}
-  enemyAudio: {fileID: 8200000}
-  hitParticles: {fileID: 19800000}
-  capsuleCollider: {fileID: 13600000}
+  _anim: {fileID: 9500000}
+  _enemyAudio: {fileID: 8200000}
+  _hitParticles: {fileID: 19800000}
+  _capsuleCollider: {fileID: 13600000}
 --- !u!114 &114527849838549444
 MonoBehaviour:
   m_ObjectHideFlags: 0
