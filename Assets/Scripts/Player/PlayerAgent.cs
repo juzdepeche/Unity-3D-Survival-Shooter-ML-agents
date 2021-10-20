@@ -78,6 +78,13 @@ public class PlayerAgent : Agent
 
     private void HeuristicAimbot(ActionSegment<float> continuousActions, ActionSegment<int> discreteActions)
     {
+        if (_enemySpawnerManager == null)
+        {
+            Debug.LogWarning("This agent has no EnemySpawnerManager reference to aimbot. Are you in a training environment?");
+            discreteActions[0] = 0;
+            return;
+        }
+        
         Vector3 closestEnemy = _enemySpawnerManager.GetClosestEnemyPositionFromPlayer();
         if (closestEnemy != Vector3.zero)
         {
