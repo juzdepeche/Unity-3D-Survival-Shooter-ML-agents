@@ -1,19 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Unity.MLAgents;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private bool _isBossSpawner = false;
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private float _spawnTime = 3f;
     [SerializeField] private EnemySpawnerManager _enemySpawnerManager;
     private Queue<Enemy> enemyPool = new Queue<Enemy>();
 
-    void Start ()
+    private void Start ()
     {
         FillPool(10);
-        InvokeRepeating ("Spawn", _spawnTime, _spawnTime);
+        StartCoroutine(SpawnCoroutine());
     }
+
+    private IEnumerator SpawnCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Academy.Instance.EnvironmentParameters.GetWithDefault(_isBossSpawner ? "big_enemy_spawn_rate" : "normal_enemy_spawn_rate", _spawnTime));
+            Spawn();
+        }
+    }
+
 
     private void FillPool(int instanceToCreateCount)
     {

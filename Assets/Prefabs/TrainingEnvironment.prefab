@@ -296,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 7421373185798781856, guid: ea3c2728ef33e3a4d99527a86cda6465,
     type: 3}
+  _isBossSpawner: 0
   _spawnPoints:
   - {fileID: 7095420498175338027}
   _spawnTime: 5
@@ -314,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 683709421151458023, guid: 57389b8a9071446bda143dc75b8a0778,
     type: 3}
+  _isBossSpawner: 0
   _spawnPoints:
   - {fileID: 7095420498877753607}
   _spawnTime: 5
@@ -332,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8385416027791134181, guid: 548c56f4bcf4db24b8aa057e9846a005,
     type: 3}
+  _isBossSpawner: 1
   _spawnPoints:
   - {fileID: 7095420499843485722}
   _spawnTime: 12

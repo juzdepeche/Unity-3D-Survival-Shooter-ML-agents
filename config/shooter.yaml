@@ -29,3 +29,77 @@ behaviors:
     max_steps: 10000000
     time_horizon: 128
     summary_freq: 30000
+environment_parameters:
+  normal_enemy_spawn_rate:
+    curriculum:
+      - name: Lesson1
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 100
+        value: 5
+      - name: Lesson2
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 120
+        value: 4
+      - name: Lesson3
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 140
+        value: 3
+      - name: Lesson4
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 150
+        value: 2.5
+      - name: Lesson5
+        value: 2  
+  big_enemy_spawn_rate:
+    curriculum:
+      - name: Lesson1
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 100
+        value: 12
+      - name: Lesson2
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 120
+        value: 11
+      - name: Lesson3
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 140
+        value: 10
+      - name: Lesson4
+        completion_criteria:
+          measure: reward
+          behavior: Shooter
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 150
+        value: 9
+      - name: Lesson5
+        value: 8  
+  
