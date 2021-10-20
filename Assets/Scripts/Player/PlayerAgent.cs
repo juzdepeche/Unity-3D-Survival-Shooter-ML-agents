@@ -23,6 +23,9 @@ public class PlayerAgent : Agent
 
     void FixedUpdate()
     {
+        if (_enemySpawnerManager == null)
+            return;
+            
         AddReward(0.01f / (float) (_enemySpawnerManager.EnemyCount == 0 ? 1 : _enemySpawnerManager.EnemyCount));
     }
 

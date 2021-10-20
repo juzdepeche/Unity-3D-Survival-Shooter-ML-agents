@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0115579f457f74ffa817677bf031b28c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 459456324}
   smoothing: 5
 --- !u!1 &263031897
 GameObject:
@@ -563,6 +563,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &459456315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8795278036387179335, guid: 1e87405334bf84b4bb00f01b5a1cdafd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2144124264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8edb1f820715743a71c65e356debeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &459456318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114545796945351556, guid: 1e87405334bf84b4bb00f01b5a1cdafd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2144124264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544f2064df03e95419b4a5147c506b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &459456324 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4925742195866752, guid: 1e87405334bf84b4bb00f01b5a1cdafd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2144124264}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &526385904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,6 +1394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 7421373185798781856, guid: ea3c2728ef33e3a4d99527a86cda6465,
     type: 3}
+  _isBossSpawner: 0
   _spawnPoints:
   - {fileID: 1666955883}
   _spawnTime: 5
@@ -1399,6 +1430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8385416027791134181, guid: 548c56f4bcf4db24b8aa057e9846a005,
     type: 3}
+  _isBossSpawner: 0
   _spawnPoints:
   - {fileID: 263031898}
   _spawnTime: 12
@@ -1417,6 +1449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 683709421151458023, guid: 57389b8a9071446bda143dc75b8a0778,
     type: 3}
+  _isBossSpawner: 0
   _spawnPoints:
   - {fileID: 1228780871}
   _spawnTime: 5
@@ -1433,9 +1466,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5c97c9a7d63014cb7afb054d516f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
-  _playerHealth: {fileID: 0}
-  _playerAgent: {fileID: 0}
+  _playerTransform: {fileID: 459456324}
+  _playerHealth: {fileID: 459456318}
+  _playerAgent: {fileID: 459456315}
 --- !u!1001 &2144124264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1491,6 +1524,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114545796945351556, guid: 1e87405334bf84b4bb00f01b5a1cdafd,
+        type: 3}
+      propertyPath: damageImage
+      value: 
+      objectReference: {fileID: 526385906}
+    - target: {fileID: 114545796945351556, guid: 1e87405334bf84b4bb00f01b5a1cdafd,
+        type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1778988019}
+    - target: {fileID: 4634432789207796004, guid: 1e87405334bf84b4bb00f01b5a1cdafd,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: c0e6b7671374cfd448983fb5239e57f4,
+        type: 3}
     - target: {fileID: 4634432789207796004, guid: 1e87405334bf84b4bb00f01b5a1cdafd,
         type: 3}
       propertyPath: m_BehaviorType
